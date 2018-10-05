@@ -1,1 +1,1 @@
-# RestConsumer
+# RestTemplate Consumer
