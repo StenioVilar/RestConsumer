@@ -9,9 +9,6 @@ import java.util.Set;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-import br.com.sipag.web.sipagnet.util.SwaggerConstantes;
-import br.com.sippe.web.sipagnet.vo.entidade.VoFunctionalityState;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
