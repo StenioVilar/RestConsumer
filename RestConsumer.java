@@ -1,3 +1,5 @@
+package main;
+
 import java.lang.reflect.Type;
 import java.net.URI;
 import java.util.ArrayList;
@@ -16,32 +18,25 @@ public class RestTemplateConsumer {
 
 	private RestTemplate restTemplate;
 
-	//MODELO EXEMPLO
-	public void buscarBloqueios(Long contaCartao, Integer componente,
-			String banCar) {
+	//MODELO EXEMPLO GET
+	public void getMethod() throws Exception {
 
 		initRestTemplate();
 		HashMap<String, String> parametrosRequisicao = new HashMap<String, String>();
-		parametrosRequisicao.put("accountNumber", "*********");
-		parametrosRequisicao.put("component", "1");
-		parametrosRequisicao.put("type", "0");
-		parametrosRequisicao.put("cardBrand", "MA");
+		parametrosRequisicao.put("parameter", "*********");
 
-		String url = addParamentrosURLGET(
-				System.getProperty(SwaggerConstantes.URL_SWAGGER_FUNCTIONALITY_STATE)
-						+ "/functionalityState/actives", parametrosRequisicao);
+		String url = addParamentrosURLGET(System.getProperty(SwaggerConstantes.URL_SWAGGER_VARIABLE_NAME)
+						+ "/service", parametrosRequisicao);
 
-		List<VoFunctionalityState> retornoFunctionalityState = new ArrayList<VoFunctionalityState>();
+		List<VoResponse> returnResponse = new ArrayList<VoResponse>();
 
 		ResponseEntity<String> response = restTemplate.getForEntity(
 				new URI(url), String.class);
 
 		if (response.getStatusCode().is2xxSuccessful()) {
-			Type listType = new TypeToken<ArrayList<VoFunctionalityState>>() {
-			}.getType();
+			Type listType = new TypeToken<ArrayList<VoResponse>>() {}.getType();
 			Gson gson = new Gson();
-			retornoFunctionalityState = gson.fromJson(response.getBody(),
-					listType);
+			returnResponse = gson.fromJson(response.getBody(),listType);
 		} else {
 			throw new Exception("Serviço temporariamente indisponível.");
 		}
@@ -50,8 +45,8 @@ public class RestTemplateConsumer {
 	
 	
 	//SERVIÇO PARA ADICIONAR PARAMETROS A URL - GET METHOD
-	protected String addParamentrosURLGET(String url,
-			Map<String, String> uriVariables) {
+	protected String addParamentrosURLGET(String url,Map<String, String> uriVariables) {
+		
 		String parametros = null;
 		Set<String> chaves = uriVariables.keySet();
 		for (String chave : chaves) {
@@ -63,6 +58,7 @@ public class RestTemplateConsumer {
 						+ uriVariables.get(chave);
 			}
 		}
+		
 		String urlComParametros = url + parametros;
 		return urlComParametros;
 	}
