@@ -17,6 +17,7 @@ import com.google.gson.reflect.TypeToken;
 public class RestTemplateConsumer {
 
 	private RestTemplate restTemplate;
+	private static final Integer SUCESS_CODE = 200;
 
 	//MODELO EXEMPLO GET
 	public void getMethod() throws Exception {
@@ -42,6 +43,26 @@ public class RestTemplateConsumer {
 		}
 
 	}
+	
+	//MODELO EXEMPLO POST
+	public void postMethod() throws Exception {
+		
+          	initRestTemplate();   
+        	    		
+         	VoPost postObject = new VoPost();
+         	postObject.setParameter("*********");
+    		
+         	String url = System.getProperty(SwaggerConstantes.URL_SWAGGER_VARIABLE_NAME)+ "/functionalityState/register";
+         	ResponseEntity<String> response = restTemplate.postForEntity(url, postObject, String.class);
+         	
+         	if(response.getStatusCode().is2xxSuccessful()){
+			//Do whatever you want ;D
+        	}else{
+        		throw new Exception("Serviço temporariamente indisponível.");
+        	}
+
+        	//return retorno;
+  	}
 	
 	
 	//SERVIÇO PARA ADICIONAR PARAMETROS A URL - GET METHOD
