@@ -52,7 +52,7 @@ public class RestTemplateConsumer {
          	VoPost postObject = new VoPost();
          	postObject.setParameter("*********");
     		
-         	String url = System.getProperty(SwaggerConstantes.URL_SWAGGER_VARIABLE_NAME)+ "/functionalityState/register";
+         	String url = System.getProperty(SwaggerConstantes.URL_SWAGGER_VARIABLE_NAME)+ "/service";
          	ResponseEntity<String> response = restTemplate.postForEntity(url, postObject, String.class);
          	
          	if(response.getStatusCode().is2xxSuccessful()){
