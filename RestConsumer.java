@@ -61,7 +61,6 @@ public class RestTemplateConsumer {
         		throw new Exception("Serviço temporariamente indisponível.");
         	}
 
-        	//return retorno;
   	}
 	
 	
